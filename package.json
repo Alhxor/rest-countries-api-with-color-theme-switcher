@@ -1,5 +1,11 @@
 {
   "name": "rest-countries-api-with-color-theme-switcher",
+  "author": {
+    "name": "Sergei Korchemkin",
+    "email": "hellk.pub@gmail.com"
+  },
+  "homepage": "http://alhxor.github.io/rest-countries-api-with-color-theme-switcher",
+  "license": "MIT",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -19,7 +25,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -35,5 +43,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^2.2.0"
   }
 }
