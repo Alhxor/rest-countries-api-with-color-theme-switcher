@@ -1,24 +1,23 @@
 {
   "files": {
-    "main.css": "/rest-countries-api-with-color-theme-switcher/static/css/main.aba16f93.chunk.css",
-    "main.js": "/rest-countries-api-with-color-theme-switcher/static/js/main.d5c322be.chunk.js",
-    "main.js.map": "/rest-countries-api-with-color-theme-switcher/static/js/main.d5c322be.chunk.js.map",
+    "main.css": "/rest-countries-api-with-color-theme-switcher/static/css/main.e5bed186.chunk.css",
+    "main.js": "/rest-countries-api-with-color-theme-switcher/static/js/main.b9708869.chunk.js",
+    "main.js.map": "/rest-countries-api-with-color-theme-switcher/static/js/main.b9708869.chunk.js.map",
     "runtime-main.js": "/rest-countries-api-with-color-theme-switcher/static/js/runtime-main.2236c141.js",
     "runtime-main.js.map": "/rest-countries-api-with-color-theme-switcher/static/js/runtime-main.2236c141.js.map",
-    "static/js/2.3aa2cc28.chunk.js": "/rest-countries-api-with-color-theme-switcher/static/js/2.3aa2cc28.chunk.js",
-    "static/js/2.3aa2cc28.chunk.js.map": "/rest-countries-api-with-color-theme-switcher/static/js/2.3aa2cc28.chunk.js.map",
+    "static/js/2.d66e4f06.chunk.js": "/rest-countries-api-with-color-theme-switcher/static/js/2.d66e4f06.chunk.js",
+    "static/js/2.d66e4f06.chunk.js.map": "/rest-countries-api-with-color-theme-switcher/static/js/2.d66e4f06.chunk.js.map",
     "index.html": "/rest-countries-api-with-color-theme-switcher/index.html",
-    "precache-manifest.4f13ecc83b32c83e5cc44733c3bc0dd9.js": "/rest-countries-api-with-color-theme-switcher/precache-manifest.4f13ecc83b32c83e5cc44733c3bc0dd9.js",
+    "precache-manifest.27b4b09b6e202789b72bf309a9fc7fae.js": "/rest-countries-api-with-color-theme-switcher/precache-manifest.27b4b09b6e202789b72bf309a9fc7fae.js",
     "service-worker.js": "/rest-countries-api-with-color-theme-switcher/service-worker.js",
-    "static/css/main.aba16f93.chunk.css.map": "/rest-countries-api-with-color-theme-switcher/static/css/main.aba16f93.chunk.css.map",
-    "static/js/2.3aa2cc28.chunk.js.LICENSE.txt": "/rest-countries-api-with-color-theme-switcher/static/js/2.3aa2cc28.chunk.js.LICENSE.txt",
-    "static/media/index.css": "/rest-countries-api-with-color-theme-switcher/static/media/NunitoSans-Regular.4c8f4470.ttf",
-    "static/media/logo.svg": "/rest-countries-api-with-color-theme-switcher/static/media/logo.5d5d9eef.svg"
+    "static/css/main.e5bed186.chunk.css.map": "/rest-countries-api-with-color-theme-switcher/static/css/main.e5bed186.chunk.css.map",
+    "static/js/2.d66e4f06.chunk.js.LICENSE.txt": "/rest-countries-api-with-color-theme-switcher/static/js/2.d66e4f06.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/rest-countries-api-with-color-theme-switcher/static/media/NunitoSans-Regular.4c8f4470.ttf"
   },
   "entrypoints": [
     "static/js/runtime-main.2236c141.js",
-    "static/js/2.3aa2cc28.chunk.js",
-    "static/css/main.aba16f93.chunk.css",
-    "static/js/main.d5c322be.chunk.js"
+    "static/js/2.d66e4f06.chunk.js",
+    "static/css/main.e5bed186.chunk.css",
+    "static/js/main.b9708869.chunk.js"
   ]
 }
