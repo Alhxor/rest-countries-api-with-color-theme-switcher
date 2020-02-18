@@ -1,11 +1,12 @@
 import React, { useContext } from "react"
-import { Theme } from "components/App/App"
+
+import { ThemeContext } from "components/ThemeContext/ThemeContext"
 import { Country } from "types/Country"
 
 import "./CountryCard.css"
 
-export default function CountryCard(props: Country): JSX.Element {
-  const { colors } = useContext(Theme)
+export const CountryCard: React.FC<Country> = props => {
+  const { colors } = useContext(ThemeContext)
 
   return (
     <div
