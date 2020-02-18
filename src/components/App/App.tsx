@@ -1,33 +1,35 @@
-import React, { useState, useCallback } from "react"
+import React, { useState } from "react"
 
 import "./App.css"
 
-import { Country } from "types/Country"
-import usePostCountryService from "hooks/usePostCountryService"
+import { usePostCountryService } from "hooks/usePostCountryService"
 
 import { ThemeProvider } from "components/ThemeContext/ThemeContext"
 
 import { PageLayout } from "components/PageLayout/PageLayout"
-import { CountryCard } from "components/CountryCard/CountryCard"
+import { CountryList } from "components/CountryList/CountryList"
 import { Search } from "components/Search/Search"
 import { Filter } from "components/Filter/Filter"
 
 export const App: React.FC = () => {
-  const handleSearchChange = useCallback((query: string) => {
+  const handleSearchChange = (query: string): void => {
     if (!query) setApiQuery("http://localhost:3000/responseSample.json")
     if (query.length < 3) return
+
     setApiQuery(
       `https://restcountries.eu/rest/v2/name/${query}` +
         `?fields=name;flag;population;region;capital`
     )
-  }, [])
+  }
 
-  // const service = usePostCountryService(
-  //   `https://restcountries.eu/rest/v2/all?fields=name;flag;population;region;capital`
-  // )
+  const handleFilterSelection = (choice: string): void => {
+    if (!choice) return
+    setApiQuery(`https://restcountries.eu/rest/v2/region/${choice}`)
+  }
 
   const [apiQuery, setApiQuery]: [string, Function] = useState(
     "responseSample.json"
+    //   `https://restcountries.eu/rest/v2/all?fields=name;flag;population;region;capital`
   )
   const service = usePostCountryService(apiQuery)
 
@@ -36,21 +38,9 @@ export const App: React.FC = () => {
       <PageLayout>
         <form action="#" className="controls">
           <Search onChange={handleSearchChange} />
-          <Filter />
+          <Filter onChoice={handleFilterSelection} />
         </form>
-        {service.status === "loading" && "Loading..."}
-        {service.status === "loaded" && (
-          <ul>
-            {service.payload && service.payload.length
-              ? service.payload.map((country: Country, i: number) => (
-                  <li key={i}>
-                    <CountryCard {...country} />
-                  </li>
-                ))
-              : "Nothing found."}
-          </ul>
-        )}
-        {service.status === "error" && service.error.toString()}
+        <CountryList service={service} />
       </PageLayout>
     </ThemeProvider>
   )
