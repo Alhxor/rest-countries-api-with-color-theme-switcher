@@ -27,7 +27,7 @@ export const App: React.FC = () => {
   // )
 
   const [apiQuery, setApiQuery]: [string, Function] = useState(
-    "http://localhost:3000/responseSample.json"
+    "responseSample.json"
   )
   const service = usePostCountryService(apiQuery)
 
