@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Service } from "types/Service"
 import { Country } from "types/Country"
 
-export default function usePostCountryService(apiQuery: string) {
+export function usePostCountryService(apiQuery: string): Service<Country[]> {
   const [result, setResult] = useState<Service<Country[]>>({
     status: "loading",
   })

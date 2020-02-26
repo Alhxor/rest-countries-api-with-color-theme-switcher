@@ -4,5 +4,6 @@ export interface Country {
   population: string
   region: string
   capital: string
-  [extra]: string | object
+  alpha3Code: string
+  [extra]: string | object | Array
 }

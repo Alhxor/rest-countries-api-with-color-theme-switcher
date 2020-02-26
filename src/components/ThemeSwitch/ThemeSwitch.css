@@ -1,0 +1,15 @@
+.theme-toggle {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  color: inherit;
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+  padding: .2rem .5rem;
+  overflow: hidden;
+}
+
+.theme-toggle__icon--rotate {
+  transform: rotate(150deg);
+}

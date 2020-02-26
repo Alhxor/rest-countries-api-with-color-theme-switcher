@@ -1,0 +1,19 @@
+.controls__search {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.search__input {
+  border: none;
+  border-radius: inherit;
+  color: inherit;
+  background-color: inherit;
+  padding: 0;
+  padding-left: 1rem;
+  height: 100%;
+}
+
+.search__input::placeholder {
+  color: inherit;
+}

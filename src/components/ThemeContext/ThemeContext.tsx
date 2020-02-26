@@ -8,7 +8,7 @@ export const ThemeContext = React.createContext({
 })
 
 export const ThemeProvider: React.FC<{}> = ({ children }) => {
-  const [darkMode, setDarkMode] = useState(false)
+  const [darkMode, setDarkMode] = useState(true)
 
   const toggle = () => {
     const isDark = !darkMode

@@ -1,8 +1,9 @@
 import React, { useContext } from "react"
 import { ThemeContext } from "components/ThemeContext/ThemeContext"
+import { ThemeSwitch } from 'components/ThemeSwitch/ThemeSwitch'
 
 export const PageLayout: React.FC<{}> = ({ children }) => {
-  const { colors, toggle } = useContext(ThemeContext)
+  const { colors } = useContext(ThemeContext)
   return (
     <div
       className="page"
@@ -17,10 +18,8 @@ export const PageLayout: React.FC<{}> = ({ children }) => {
           backgroundColor: colors.elementColor,
         }}
       >
-        <h1>Where in the world?</h1>
-        <button onClick={toggle} className="themeToggle">
-          Switch theme
-        </button>
+        <h1 className="header__title">Where in the world?</h1>
+        <ThemeSwitch />
       </header>
       <main className="page__content">{children}</main>
     </div>
