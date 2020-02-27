@@ -1,0 +1,29 @@
+.country-details {
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.country-details__controls {
+  text-align: left;
+}
+
+.country-details__content {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.content__flag {
+  /* flex-grow: 1; */
+}
+
+.flag__img {
+  /* width: 100%; */
+  /* height: 100%; */
+}
+
+.content__text {
+  flex-grow: 1;
+  display: flex;
+  flex-flow: column nowrap;
+}

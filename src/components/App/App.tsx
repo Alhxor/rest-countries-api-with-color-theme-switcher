@@ -35,7 +35,13 @@ export const App: React.FC = () => {
           />
         )}
         {currentView.location === "details" && service.status === "loaded" && (
-          <CountryDetails {...service.payload} />
+          <CountryDetails
+            goBack={() => {
+              searchByRegion("europe") // Placeholder while making details layout
+              goHome()
+            }}
+            {...service.payload}
+          />
         )}
       </PageLayout>
     </ThemeProvider>

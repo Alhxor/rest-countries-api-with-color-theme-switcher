@@ -2,12 +2,12 @@ import { useState } from "react"
 
 export function useApiControls() {
   const apiBase = "https://restcountries.eu/rest/v2"
-  const apiFields = "name;flag;population;region;capital;alpha3code"
+  const apiFields = "name;flag;population;region;capital;alpha3Code"
   const apiFieldsDetailed = `${apiFields};nativeName;subregion;topLevelDomain;currencies;languages;borders`
 
   const [apiQuery, setApiQuery]: [string, Function] = useState(
     "responseSample.json"
-    //   `https://restcountries.eu/rest/v2/all?fields=name;flag;population;region;capital`
+    // `${apiBase}/all?fields=${apiFields}`
   )
 
   const searchByCountryName = (name: string): void => {

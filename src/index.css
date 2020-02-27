@@ -9,7 +9,10 @@ body {
   font-family: "Nunito Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  height: 100%;
   /* background: #ddd; */
   text-align: center;
+}
+
+html, body, #root {
+  height: 100%;
 }
