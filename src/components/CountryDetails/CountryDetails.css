@@ -1,28 +1,28 @@
-.country-details {
+.c-country-details {
   height: 100%;
   display: flex;
   flex-flow: column nowrap;
 }
 
-.country-details__controls {
+.c-controls {
   text-align: left;
 }
 
-.country-details__content {
+.c-country-details__content {
   display: flex;
   flex-flow: row nowrap;
 }
 
-.content__flag {
+.c-country-details__flag {
   /* flex-grow: 1; */
 }
 
-.flag__img {
+.c-country-details__flag-img {
   /* width: 100%; */
   /* height: 100%; */
 }
 
-.content__text {
+.c-country-details__text-info {
   flex-grow: 1;
   display: flex;
   flex-flow: column nowrap;
