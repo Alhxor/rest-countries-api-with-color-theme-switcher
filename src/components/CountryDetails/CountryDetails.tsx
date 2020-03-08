@@ -3,19 +3,31 @@ import { Country } from "types/Country"
 import { Service } from "types/Service"
 import { ThemeContext } from "components/ThemeContext/ThemeContext"
 import { CountryInfo } from "types/CountryInfo"
+import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace"
 
 import "./CountryDetails.css"
 
 interface Props {
   goBack: Function
+  goToCountry: Function
   service: Service<Country[]>
 }
 
-export const CountryDetails: React.FC<Props> = ({ service, goBack }) => {
+interface Detail {
+  title: string
+  value: string
+}
+
+export const CountryDetails: React.FC<Props> = ({
+  service,
+  goBack,
+  goToCountry,
+}) => {
   const { colors } = useContext(ThemeContext)
 
   let countryInfo: CountryInfo = { ...service.payload }
-  let details: Array<{ title: string; value: string }> = []
+  let details: Array<Detail> = []
+  let detailsSide: Array<Detail> = []
   let languages = []
   let currencies = []
   const separator = ", "
@@ -33,6 +45,8 @@ export const CountryDetails: React.FC<Props> = ({ service, goBack }) => {
       { title: "Region", value: countryInfo.region },
       { title: "Subregion", value: countryInfo.subregion },
       { title: "Capital", value: countryInfo.capital },
+    ]
+    detailsSide = [
       {
         title: "Top level domain",
         value: countryInfo.topLevelDomain.join(separator),
@@ -46,7 +60,15 @@ export const CountryDetails: React.FC<Props> = ({ service, goBack }) => {
     <>
       <div className="c-country-details">
         <div className="c-controls">
-          <button className="c-controls__back" onClick={() => goBack()}>
+          <button
+            className="c-btn c-btn--control"
+            onClick={() => goBack()}
+            style={{
+              color: colors.textColor,
+              backgroundColor: colors.elementColor,
+            }}
+          >
+            <KeyboardBackspaceIcon />
             Back
           </button>
         </div>
@@ -64,19 +86,44 @@ export const CountryDetails: React.FC<Props> = ({ service, goBack }) => {
               <header className="c-country-details__header">
                 {countryInfo.name}
               </header>
-              <ul className="c-details-list">
-                {details.map(({ title, value }) => (
-                  <li className="c-details-list__item">{`${title}: ${value}`}</li>
-                ))}
-              </ul>
+              <div className="l-list-container">
+                <ul className="c-details-list">
+                  {details.map(({ title, value }) => (
+                    <li className="c-details-list__item">
+                      <span className="h-bold">{title}:&nbsp;</span>
+                      {value}
+                    </li>
+                  ))}
+                </ul>
+                <ul className="c-details-list">
+                  {detailsSide.map(({ title, value }) => (
+                    <li className="c-details-list__item">
+                      <span className="h-bold">{title}:&nbsp;</span>
+                      {value}
+                    </li>
+                  ))}
+                </ul>
+              </div>
               <div className="c-country-borders">
                 <header className="c-country-borders__header">
-                  Border Countries:
+                  Border Countries:&nbsp;
                 </header>
                 <ul className="c-country-borders__list">
-                  <li className="c-country-borders__item">
-                    {countryInfo.borders && countryInfo.borders.join(separator)}
-                  </li>
+                  {countryInfo.borders &&
+                    countryInfo.borders.map(countryCode => (
+                      <li className="c-country-borders__item">
+                        <button
+                          className="c-btn"
+                          onClick={() => goToCountry(countryCode)}
+                          style={{
+                            color: colors.textColor,
+                            backgroundColor: colors.elementColor,
+                          }}
+                        >
+                          {countryCode}
+                        </button>
+                      </li>
+                    ))}
                 </ul>
               </div>
             </div>

@@ -38,10 +38,8 @@ export const App: React.FC = () => {
         )}
         {currentView.location === "details" && (
           <CountryDetails
-            goBack={() => {
-              // searchByRegion("europe") // Placeholder while making details layout
-              goHome()
-            }}
+            goBack={goHome}
+            goToCountry={searchByCode}
             service={detailsService}
           />
         )}
