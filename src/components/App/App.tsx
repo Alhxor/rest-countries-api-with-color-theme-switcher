@@ -13,19 +13,21 @@ import { CountryDetails } from "components/CountryDetails/CountryDetails"
 export const App: React.FC = () => {
   const { currentView, showDetails, goHome } = useLocation()
   const {
-    apiQuery,
+    apiQuery: apiQueryHome,
     searchByCountryName,
     searchByRegion,
-    searchByCode,
   } = useApiControls()
-  const service = usePostCountryService(apiQuery)
+  const homeService = usePostCountryService(apiQueryHome)
+
+  const { apiQuery: apiQueryDetails, searchByCode } = useApiControls()
+  const detailsService = usePostCountryService(apiQueryDetails)
 
   return (
     <ThemeProvider>
       <PageLayout>
         {currentView.location === "home" && (
           <Home
-            service={service}
+            service={homeService}
             showDetails={(code: string) => {
               searchByCode(code)
               showDetails(code)
@@ -34,13 +36,13 @@ export const App: React.FC = () => {
             searchByRegion={searchByRegion}
           />
         )}
-        {currentView.location === "details" && service.status === "loaded" && (
+        {currentView.location === "details" && (
           <CountryDetails
             goBack={() => {
-              searchByRegion("europe") // Placeholder while making details layout
+              // searchByRegion("europe") // Placeholder while making details layout
               goHome()
             }}
-            {...service.payload}
+            service={detailsService}
           />
         )}
       </PageLayout>

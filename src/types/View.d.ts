@@ -4,7 +4,7 @@ interface ViewHome {
 
 interface ViewDetails {
   location: "details"
-  code: String
+  code: string
 }
 
 export type View = ViewHome | ViewDetails
