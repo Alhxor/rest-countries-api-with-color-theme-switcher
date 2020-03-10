@@ -1,30 +1,32 @@
-import React, { useContext } from "react"
+import React, { useState, useEffect } from "react"
 import "./CountryDetails.css"
-import { Country } from "types/Country"
-import { Service } from "types/Service"
 import { Detail } from "types/Detail"
 import { CountryInfo } from "types/CountryInfo"
+import { constructApiQuery } from "utils/constructApiQuery"
+import { usePostCountryService } from "hooks/usePostCountryService"
 import { CountryBordersList } from "components/CountryBordersList/CountryBordersList"
 import { CountryDetailsList } from "components/CountryDetailsList/CountryDetailsList"
 import { CountryFlag } from "components/CountryFlag/CountryFlag"
 import { ButtonBack } from "components/ButtonBack/ButtonBack"
+import { ApiSearch } from "types/ApiSearch"
 
 interface Props {
+  countryCode: string
   goBack: () => void
   goToCountry: (countryCode: string) => void
-  queryForCountryNames: (codes: Array<string>) => void
-  useDetailsService: () => Service<Country[]>
-  useBordersService: () => Service<Country[]>
 }
 
 export const CountryDetails: React.FC<Props> = ({
-  useDetailsService,
-  useBordersService,
-  queryForCountryNames,
+  countryCode,
   goBack,
   goToCountry,
 }) => {
-  const service = useDetailsService()
+  const search: ApiSearch = { type: "code", query: countryCode }
+  const [apiQuery, setApiQuery] = useState(
+    constructApiQuery(search)
+  )
+
+  const service = usePostCountryService(apiQuery)
 
   let countryInfo: CountryInfo = { ...service.payload }
   let details: Array<Detail> = []
@@ -89,8 +91,6 @@ export const CountryDetails: React.FC<Props> = ({
                 <CountryBordersList
                   borderCodes={countryInfo.borders}
                   goToCountry={goToCountry}
-                  useBordersService={useBordersService}
-                  queryForCountryNames={queryForCountryNames}
                 />
               )}
             </div>

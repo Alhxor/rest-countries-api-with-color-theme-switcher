@@ -1,25 +1,24 @@
-import React, { useContext } from "react"
-import { Service } from "types/Service"
+import React, { useContext, useState } from "react"
 import { Country } from "types/Country"
 import { ThemeContext } from "components/ThemeContext/ThemeContext"
+import { constructApiQuery } from "utils/constructApiQuery"
+import { usePostCountryService } from "hooks/usePostCountryService"
+import { ApiSearch } from "types/ApiSearch"
 
 interface Props {
   borderCodes: Array<string>
   goToCountry: (countryCode: string) => void
-  useBordersService: () => Service<Country[]>
-  queryForCountryNames: (codes: Array<string>) => void
 }
 
 export const CountryBordersList: React.FC<Props> = ({
   borderCodes,
   goToCountry,
-  useBordersService,
-  queryForCountryNames,
 }) => {
   const { colors } = useContext(ThemeContext)
 
-  queryForCountryNames(borderCodes)
-  const service = useBordersService()
+  const search: ApiSearch = { type: "codes", query: borderCodes.join(";") }
+  const apiQuery = constructApiQuery(search)
+  const service = usePostCountryService(apiQuery)
 
   return (
     <ul className="c-country-borders__list">

@@ -1,4 +1,6 @@
 import { useState } from "react"
+import { constructApiQuery } from "utils/constructApiQuery"
+import { ApiSearch } from "types/ApiSearch"
 
 export function useApiControls() {
   const apiBase = "https://restcountries.eu/rest/v2"
@@ -14,12 +16,12 @@ export function useApiControls() {
     if (!name) setApiQuery("responseSample.json")
     if (name.length < 3) return
 
-    setApiQuery(`${apiBase}/name/${name}?fields=${apiFields}`)
+    setApiQuery(constructApiQuery({ type: "name", query: name }))
   }
 
   const searchByRegion = (region: string): void => {
     if (!region) return
-    setApiQuery(`${apiBase}/region/${region}?fields=${apiFields}`)
+    setApiQuery(constructApiQuery({ type: "region", query: region }))
   }
 
   const searchByCode = (code: string): void => {
@@ -29,7 +31,9 @@ export function useApiControls() {
 
   const searchByCodes = (codes: Array<String>): void => {
     if (!codes || !codes.length) return
-    setApiQuery(`${apiBase}/alpha/?codes=${codes.join(";")}&fields=name;alpha3Code`)
+    setApiQuery(
+      `${apiBase}/alpha/?codes=${codes.join(";")}&fields=name;alpha3Code`
+    )
   }
 
   return {

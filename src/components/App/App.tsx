@@ -20,33 +20,22 @@ export const App: React.FC = () => {
   } = useApiControls()
   const homeService = usePostCountryService(apiQueryHome)
 
-  const { apiQuery: apiQueryDetails, searchByCode } = useApiControls()
-  const useDetailsService = () => usePostCountryService(apiQueryDetails)
-
-  const { apiQuery: apiQueryBorders, searchByCodes } = useApiControls()
-  const useBordersService = () => usePostCountryService(apiQueryBorders)
-
   return (
     <ThemeProvider>
       <PageLayout>
         {currentView.location === "home" && (
           <Home
             service={homeService}
-            showDetails={(code: string) => {
-              searchByCode(code)
-              showDetails(code)
-            }}
+            showDetails={showDetails}
             searchByCountryName={searchByCountryName}
             searchByRegion={searchByRegion}
           />
         )}
         {currentView.location === "details" && (
           <CountryDetails
+            countryCode={currentView.code}
             goBack={goHome}
-            goToCountry={searchByCode}
-            useDetailsService={useDetailsService}
-            useBordersService={useBordersService}
-            queryForCountryNames={searchByCodes}
+            goToCountry={showDetails}
           />
         )}
       </PageLayout>
