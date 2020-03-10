@@ -1,0 +1,11 @@
+.c-country-flag {
+  height: 100%;
+  margin: 0;
+}
+
+.c-country-flag__img {
+  display: block;
+  height: 100%;
+  width: 100%;
+  /* object-fit: scale-down; */
+}

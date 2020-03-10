@@ -6,6 +6,7 @@
   box-shadow: 2px 2px 10px 0 hsla(0, 0%, 0%, 0.2);
   border-radius: 5px;
   text-align: left;
+  overflow: hidden;
 }
 
 .card__info {
@@ -18,11 +19,8 @@
   margin-bottom: .4rem;
 }
 
-.card__img {
-  display: block;
-  border-top-left-radius: inherit;
-  border-top-right-radius: inherit;
-  /* object-fit: contain; */
+.card__flag {
   width: 15rem;
   height: 10rem;
+  overflow: hidden;
 }

@@ -1,12 +1,13 @@
 import React, { useContext } from "react"
+import "./CountryDetails.css"
 import { Country } from "types/Country"
 import { Service } from "types/Service"
-import { ThemeContext } from "components/ThemeContext/ThemeContext"
+import { Detail } from "types/Detail"
 import { CountryInfo } from "types/CountryInfo"
 import { CountryBordersList } from "components/CountryBordersList/CountryBordersList"
-import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace"
-
-import "./CountryDetails.css"
+import { CountryDetailsList } from "components/CountryDetailsList/CountryDetailsList"
+import { CountryFlag } from "components/CountryFlag/CountryFlag"
+import { ButtonBack } from "components/ButtonBack/ButtonBack"
 
 interface Props {
   goBack: () => void
@@ -16,11 +17,6 @@ interface Props {
   useBordersService: () => Service<Country[]>
 }
 
-interface Detail {
-  title: string
-  value: string | number
-}
-
 export const CountryDetails: React.FC<Props> = ({
   useDetailsService,
   useBordersService,
@@ -28,7 +24,6 @@ export const CountryDetails: React.FC<Props> = ({
   goBack,
   goToCountry,
 }) => {
-  const { colors } = useContext(ThemeContext)
   const service = useDetailsService()
 
   let countryInfo: CountryInfo = { ...service.payload }
@@ -63,73 +58,46 @@ export const CountryDetails: React.FC<Props> = ({
   }
 
   return (
-    <>
-      <div className="c-country-details">
-        <div className="c-controls">
-          <button
-            className="c-btn c-btn--control"
-            onClick={() => goBack()}
-            style={{
-              color: colors.textColor,
-              backgroundColor: colors.elementColor,
-            }}
-          >
-            <KeyboardBackspaceIcon />
-            Back
-          </button>
-        </div>
-        {service.status === "loading" && "Loading"}
-        {service.status === "loaded" && (
-          <div className="c-country-details__content">
-            <figure className="c-country-details__flag">
-              <img
-                src={countryInfo.flag}
-                alt={`${countryInfo.name}'s flag.`}
-                className="c-country-details__flag-img"
-              />
-            </figure>
-            <div className="c-country-details__text-info">
-              <header className="c-country-details__header">
-                {countryInfo.name}
+    <div className="c-country-details">
+      <div className="c-controls">
+        <ButtonBack onClick={() => goBack()} />
+      </div>
+      {service.status === "loading" && "Loading"}
+      {service.status === "loaded" && (
+        <div className="c-country-details__content">
+          <div className="c-country-details__flag">
+            <CountryFlag
+              src={countryInfo.flag}
+              alt={`${countryInfo.name}'s flag.`}
+            />
+          </div>
+          <div className="c-country-details__text-info">
+            <header className="c-country-details__header">
+              {countryInfo.name}
+            </header>
+            <div className="l-list-container">
+              <CountryDetailsList details={details} />
+              <CountryDetailsList details={detailsSide} />
+            </div>
+            <div className="c-country-borders">
+              <header className="c-country-borders__header">
+                Border Countries:&nbsp;
               </header>
-              <div className="l-list-container">
-                <ul className="c-details-list">
-                  {details.map(({ title, value }, ind) => (
-                    <li className="c-details-list__item" key={ind}>
-                      <span className="h-bold">{title}:&nbsp;</span>
-                      {value}
-                    </li>
-                  ))}
-                </ul>
-                <ul className="c-details-list">
-                  {detailsSide.map(({ title, value }, ind) => (
-                    <li className="c-details-list__item" key={ind}>
-                      <span className="h-bold">{title}:&nbsp;</span>
-                      {value}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="c-country-borders">
-                <header className="c-country-borders__header">
-                  Border Countries:&nbsp;
-                </header>
-                {countryInfo.borders === [] ? (
-                  "None"
-                ) : (
-                  <CountryBordersList
-                    borderCodes={countryInfo.borders}
-                    goToCountry={goToCountry}
-                    useBordersService={useBordersService}
-                    queryForCountryNames={queryForCountryNames}
-                  />
-                )}
-              </div>
+              {countryInfo.borders.length === 0 ? (
+                "None"
+              ) : (
+                <CountryBordersList
+                  borderCodes={countryInfo.borders}
+                  goToCountry={goToCountry}
+                  useBordersService={useBordersService}
+                  queryForCountryNames={queryForCountryNames}
+                />
+              )}
             </div>
           </div>
-        )}
-        {service.status === "error" && service.error.toString()}
-      </div>
-    </>
+        </div>
+      )}
+      {service.status === "error" && service.error.toString()}
+    </div>
   )
 }
