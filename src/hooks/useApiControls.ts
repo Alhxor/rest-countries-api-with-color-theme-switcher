@@ -1,15 +1,9 @@
 import { useState } from "react"
 import { constructApiQuery } from "utils/constructApiQuery"
-import { ApiSearch } from "types/ApiSearch"
 
 export function useApiControls() {
-  const apiBase = "https://restcountries.eu/rest/v2"
-  const apiFields = "name;flag;population;region;capital;alpha3Code"
-  const apiFieldsDetailed = `${apiFields};nativeName;subregion;topLevelDomain;currencies;languages;borders`
-
   const [apiQuery, setApiQuery]: [string, Function] = useState(
-    "responseSample.json"
-    // `${apiBase}/all?fields=${apiFields}`
+    constructApiQuery({ type: "all" })
   )
 
   const searchByCountryName = (name: string): void => {
@@ -26,14 +20,12 @@ export function useApiControls() {
 
   const searchByCode = (code: string): void => {
     if (!code) return
-    setApiQuery(`${apiBase}/alpha/${code}?fields=${apiFieldsDetailed}`)
+    setApiQuery(constructApiQuery({ type: "code", query: code }))
   }
 
-  const searchByCodes = (codes: Array<String>): void => {
-    if (!codes || !codes.length) return
-    setApiQuery(
-      `${apiBase}/alpha/?codes=${codes.join(";")}&fields=name;alpha3Code`
-    )
+  const searchByCodes = (codes: string): void => {
+    if (!codes) return
+    setApiQuery(constructApiQuery({ type: "codes", query: codes }))
   }
 
   return {

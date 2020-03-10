@@ -22,9 +22,9 @@ export const CountryDetails: React.FC<Props> = ({
   goToCountry,
 }) => {
   const search: ApiSearch = { type: "code", query: countryCode }
-  const [apiQuery, setApiQuery] = useState(
-    constructApiQuery(search)
-  )
+  const [apiQuery, setApiQuery] = useState(constructApiQuery(search))
+
+  useEffect(() => setApiQuery(constructApiQuery(search)), [search])
 
   const service = usePostCountryService(apiQuery)
 
