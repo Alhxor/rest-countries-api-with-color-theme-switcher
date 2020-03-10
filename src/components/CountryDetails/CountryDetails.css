@@ -77,9 +77,13 @@
 
 .c-country-borders {
   display: flex;
-  /* justify-content: flex-start; */
+  justify-content: flex-start;
   align-items: center;
   text-align: left;
+}
+
+.c-country-borders__header {
+  font-weight: bold;
 }
 
 .c-country-borders__list {

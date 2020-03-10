@@ -1,9 +1,9 @@
 export interface Country {
   name: string
   flag: string
-  population: string
+  population: number
   region: string
   capital: string
   alpha3Code: string
-  [extra]: string | object | Array
+  [extra]: string | number | object | Array
 }

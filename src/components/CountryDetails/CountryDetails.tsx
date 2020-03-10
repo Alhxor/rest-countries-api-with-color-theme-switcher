@@ -3,27 +3,33 @@ import { Country } from "types/Country"
 import { Service } from "types/Service"
 import { ThemeContext } from "components/ThemeContext/ThemeContext"
 import { CountryInfo } from "types/CountryInfo"
+import { CountryBordersList } from "components/CountryBordersList/CountryBordersList"
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace"
 
 import "./CountryDetails.css"
 
 interface Props {
-  goBack: Function
-  goToCountry: Function
-  service: Service<Country[]>
+  goBack: () => void
+  goToCountry: (countryCode: string) => void
+  queryForCountryNames: (codes: Array<string>) => void
+  useDetailsService: () => Service<Country[]>
+  useBordersService: () => Service<Country[]>
 }
 
 interface Detail {
   title: string
-  value: string
+  value: string | number
 }
 
 export const CountryDetails: React.FC<Props> = ({
-  service,
+  useDetailsService,
+  useBordersService,
+  queryForCountryNames,
   goBack,
   goToCountry,
 }) => {
   const { colors } = useContext(ThemeContext)
+  const service = useDetailsService()
 
   let countryInfo: CountryInfo = { ...service.payload }
   let details: Array<Detail> = []
@@ -41,7 +47,7 @@ export const CountryDetails: React.FC<Props> = ({
     currencies = countryInfo.currencies.map(({ name }) => name)
     details = [
       { title: "Native name", value: countryInfo.nativeName },
-      { title: "Population", value: countryInfo.population },
+      { title: "Population", value: countryInfo.population.toLocaleString() },
       { title: "Region", value: countryInfo.region },
       { title: "Subregion", value: countryInfo.subregion },
       { title: "Capital", value: countryInfo.capital },
@@ -88,16 +94,16 @@ export const CountryDetails: React.FC<Props> = ({
               </header>
               <div className="l-list-container">
                 <ul className="c-details-list">
-                  {details.map(({ title, value }) => (
-                    <li className="c-details-list__item">
+                  {details.map(({ title, value }, ind) => (
+                    <li className="c-details-list__item" key={ind}>
                       <span className="h-bold">{title}:&nbsp;</span>
                       {value}
                     </li>
                   ))}
                 </ul>
                 <ul className="c-details-list">
-                  {detailsSide.map(({ title, value }) => (
-                    <li className="c-details-list__item">
+                  {detailsSide.map(({ title, value }, ind) => (
+                    <li className="c-details-list__item" key={ind}>
                       <span className="h-bold">{title}:&nbsp;</span>
                       {value}
                     </li>
@@ -108,23 +114,16 @@ export const CountryDetails: React.FC<Props> = ({
                 <header className="c-country-borders__header">
                   Border Countries:&nbsp;
                 </header>
-                <ul className="c-country-borders__list">
-                  {countryInfo.borders &&
-                    countryInfo.borders.map(countryCode => (
-                      <li className="c-country-borders__item">
-                        <button
-                          className="c-btn"
-                          onClick={() => goToCountry(countryCode)}
-                          style={{
-                            color: colors.textColor,
-                            backgroundColor: colors.elementColor,
-                          }}
-                        >
-                          {countryCode}
-                        </button>
-                      </li>
-                    ))}
-                </ul>
+                {countryInfo.borders === [] ? (
+                  "None"
+                ) : (
+                  <CountryBordersList
+                    borderCodes={countryInfo.borders}
+                    goToCountry={goToCountry}
+                    useBordersService={useBordersService}
+                    queryForCountryNames={queryForCountryNames}
+                  />
+                )}
               </div>
             </div>
           </div>

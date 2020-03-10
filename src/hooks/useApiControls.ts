@@ -27,5 +27,16 @@ export function useApiControls() {
     setApiQuery(`${apiBase}/alpha/${code}?fields=${apiFieldsDetailed}`)
   }
 
-  return { apiQuery, searchByCountryName, searchByRegion, searchByCode }
+  const searchByCodes = (codes: Array<String>): void => {
+    if (!codes || !codes.length) return
+    setApiQuery(`${apiBase}/alpha/?codes=${codes.join(";")}&fields=name;alpha3Code`)
+  }
+
+  return {
+    apiQuery,
+    searchByCountryName,
+    searchByRegion,
+    searchByCode,
+    searchByCodes,
+  }
 }

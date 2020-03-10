@@ -23,7 +23,7 @@ export const CountryCard: React.FC<Country> = props => {
       />
       <div className="card__info">
         <p className="card__title">{props.name}</p>
-        <span>Population: {props.population}</span>
+        <span>Population: {props.population.toLocaleString()}</span>
         <br />
         <span>Region: {props.region}</span>
         <br />

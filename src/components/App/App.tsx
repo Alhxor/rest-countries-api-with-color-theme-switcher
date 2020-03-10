@@ -12,6 +12,7 @@ import { CountryDetails } from "components/CountryDetails/CountryDetails"
 
 export const App: React.FC = () => {
   const { currentView, showDetails, goHome } = useLocation()
+
   const {
     apiQuery: apiQueryHome,
     searchByCountryName,
@@ -20,7 +21,10 @@ export const App: React.FC = () => {
   const homeService = usePostCountryService(apiQueryHome)
 
   const { apiQuery: apiQueryDetails, searchByCode } = useApiControls()
-  const detailsService = usePostCountryService(apiQueryDetails)
+  const useDetailsService = () => usePostCountryService(apiQueryDetails)
+
+  const { apiQuery: apiQueryBorders, searchByCodes } = useApiControls()
+  const useBordersService = () => usePostCountryService(apiQueryBorders)
 
   return (
     <ThemeProvider>
@@ -40,7 +44,9 @@ export const App: React.FC = () => {
           <CountryDetails
             goBack={goHome}
             goToCountry={searchByCode}
-            service={detailsService}
+            useDetailsService={useDetailsService}
+            useBordersService={useBordersService}
+            queryForCountryNames={searchByCodes}
           />
         )}
       </PageLayout>
