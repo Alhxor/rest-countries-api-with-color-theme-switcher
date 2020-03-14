@@ -1,7 +1,5 @@
 import React from "react"
 
-import "./App.css"
-
 import { usePostCountryService } from "hooks/usePostCountryService"
 import { useLocation } from "hooks/useLocation"
 import { useApiControls } from "hooks/useApiControls"
@@ -9,6 +7,8 @@ import { ThemeProvider } from "components/ThemeContext/ThemeContext"
 import { PageLayout } from "components/PageLayout/PageLayout"
 import { Home } from "components/Home/Home"
 import { CountryDetails } from "components/CountryDetails/CountryDetails"
+
+import "./App.css"
 
 export const App: React.FC = () => {
   const { currentView, showDetails, goHome } = useLocation()

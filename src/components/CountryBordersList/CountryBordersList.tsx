@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"
+import React, { useContext } from "react"
 import { Country } from "types/Country"
 import { ThemeContext } from "components/ThemeContext/ThemeContext"
 import { constructApiQuery } from "utils/constructApiQuery"

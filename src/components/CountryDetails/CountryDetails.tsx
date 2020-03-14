@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react"
-import "./CountryDetails.css"
 import { Detail } from "types/Detail"
 import { CountryInfo } from "types/CountryInfo"
+import { ApiSearch } from "types/ApiSearch"
 import { constructApiQuery } from "utils/constructApiQuery"
 import { usePostCountryService } from "hooks/usePostCountryService"
 import { CountryBordersList } from "components/CountryBordersList/CountryBordersList"
 import { CountryDetailsList } from "components/CountryDetailsList/CountryDetailsList"
 import { CountryFlag } from "components/CountryFlag/CountryFlag"
 import { ButtonBack } from "components/ButtonBack/ButtonBack"
-import { ApiSearch } from "types/ApiSearch"
+
+import "./CountryDetails.css"
 
 interface Props {
   countryCode: string
@@ -20,7 +21,7 @@ export const CountryDetails: React.FC<Props> = ({
   countryCode,
   goBack,
   goToCountry,
-}) => {
+}) => { /* TODO: Refactor logic out of the component */
   const search: ApiSearch = { type: "code", query: countryCode }
   const [apiQuery, setApiQuery] = useState(constructApiQuery(search))
 
